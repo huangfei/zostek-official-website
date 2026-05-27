@@ -126,6 +126,7 @@ function Header() {
 
 function Hero() {
   const reduceMotion = useReducedMotion();
+  const heroImage = `${import.meta.env.BASE_URL}assets/hero-bg.jpg`;
 
   return (
     <section id="hero" className="hero-section">
@@ -160,7 +161,7 @@ function Hero() {
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.75, ease: 'easeOut', delay: 0.08 }}
         >
-          <img src="/assets/hero-bg.jpg" alt="射频与毫米波芯片电路视觉" />
+          <img src={heroImage} alt="射频与毫米波芯片电路视觉" />
           <div className="spec-plate top">
             <span>RF / mmWave</span>
             <strong>定制化芯片与系统解决方案</strong>
