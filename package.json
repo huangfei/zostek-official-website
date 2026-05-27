@@ -9,6 +9,7 @@
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
+    "@fontsource-variable/inter-tight": "^5.2.7",
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.1.17",
     "@vitejs/plugin-react": "^5.1.1",
