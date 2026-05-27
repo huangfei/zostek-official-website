@@ -33,6 +33,25 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Checkout style 2
+        uses: actions/checkout@v4
+        with:
+          ref: 风格2
+          path: style2-src
+
+      - name: Install style 2 dependencies
+        working-directory: style2-src
+        run: npm ci
+
+      - name: Build style 2
+        working-directory: style2-src
+        run: npm run build -- --base=/zostek-official-website/style2/
+
+      - name: Copy style 2 artifact
+        run: |
+          mkdir -p dist/style2
+          cp -R style2-src/dist/* dist/style2/
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
