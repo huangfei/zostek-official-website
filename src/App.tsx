@@ -44,6 +44,7 @@ function SectionHeader({
       variants={fadeUp}
       transition={{ duration: 0.55, ease: 'easeOut' }}
     >
+      <span className="section-rule" aria-hidden="true" />
       <h2>{title}</h2>
       <p>{description}</p>
     </motion.div>
@@ -126,11 +127,11 @@ function Header() {
 
 function Hero() {
   const reduceMotion = useReducedMotion();
-  const heroImage = `${import.meta.env.BASE_URL}assets/hero-bg.jpg`;
+  const heroImage = `${import.meta.env.BASE_URL}assets/style3-chip-hero-real-qfn.png`;
 
   return (
     <section id="hero" className="hero-section">
-      <div className="hero-grid">
+      <div className="hero-shell">
         <motion.div
           className="hero-copy"
           initial={reduceMotion ? false : { opacity: 0, y: 34 }}
@@ -139,7 +140,8 @@ function Hero() {
         >
           <h1>
             <span>以极致芯片</span>
-            <span>成就客户的每一个构想</span>
+            <span>成就客户的</span>
+            <span>每一个构想</span>
           </h1>
           <p>
             专注于射频与毫米波芯片设计，为系统厂商提供旗舰级定制化芯片与系统解决方案。
@@ -162,33 +164,21 @@ function Hero() {
           transition={{ duration: 0.75, ease: 'easeOut', delay: 0.08 }}
         >
           <img src={heroImage} alt="射频与毫米波芯片电路视觉" />
-          <div className="spec-plate top">
-            <span>RF / mmWave</span>
-            <strong>定制化芯片与系统解决方案</strong>
-          </div>
-          <div className="spec-plate bottom">
-            <Circuitry size={20} />
+          <div className="hero-chip-card">
+            <Circuitry size={22} />
             <span>模块、芯片、整机协同优化</span>
           </div>
         </motion.div>
-      </div>
 
-      <motion.div
-        className="hero-stats"
-        initial={reduceMotion ? false : 'hidden'}
-        animate={reduceMotion ? undefined : 'visible'}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.08, delayChildren: 0.35 } },
-        }}
-      >
-        {heroStats.map((stat) => (
-          <motion.div key={stat.label} variants={fadeUp}>
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-          </motion.div>
-        ))}
-      </motion.div>
+        <div className="hero-stats">
+          {heroStats.map((stat) => (
+            <div key={stat.label}>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -197,33 +187,11 @@ function About() {
   return (
     <section id="about" className="section about-section">
       <SectionHeader
-        title="与客户共同定义价值"
-        description="琢时科技始终锚定前沿技术赛道，深入客户真实使用场景与用户深度共创。"
+        title="共同定义芯片，而不是只交付器件"
+        description="琢时科技始终锚定客户真实系统场景，从芯片定义、系统指标到量产质量，全链路参与关键价值创造。"
       />
 
-      <div className="value-grid">
-        {valuePillars.map((pillar, index) => {
-          const Icon = pillar.icon;
-          return (
-            <motion.article
-              className="value-card"
-              key={pillar.title}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              variants={fadeUp}
-              transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.06 }}
-            >
-              <Icon size={26} weight="duotone" />
-              <h3>{pillar.title}</h3>
-              <p>{pillar.description}</p>
-              <small>{pillar.detail}</small>
-            </motion.article>
-          );
-        })}
-      </div>
-
-      <div className="about-lower">
+      <div className="about-showcase">
         <motion.div
           className="mission-panel"
           initial="hidden"
@@ -246,25 +214,47 @@ function About() {
           </div>
         </motion.div>
 
-        <motion.div
-          className="timeline-panel"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeUp}
-          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.08 }}
-        >
-          <h3>发展历程</h3>
-          <ol>
-            {timeline.map((item) => (
-              <li key={item.year}>
-                <time>{item.year}</time>
-                <span>{item.event}</span>
-              </li>
-            ))}
-          </ol>
-        </motion.div>
+        <div className="value-grid">
+          {valuePillars.map((pillar, index) => {
+            const Icon = pillar.icon;
+            return (
+              <motion.article
+                className="value-card"
+                key={pillar.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewport}
+                variants={fadeUp}
+                transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.06 }}
+              >
+                <span className="value-index">0{index + 1}</span>
+                <Icon size={26} weight="duotone" />
+                <h3>{pillar.title}</h3>
+                <p>{pillar.description}</p>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
+
+      <motion.div
+        className="timeline-panel"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        variants={fadeUp}
+        transition={{ duration: 0.55, ease: 'easeOut' }}
+      >
+        <h3>发展历程</h3>
+        <ol>
+          {timeline.map((item) => (
+            <li key={item.year}>
+              <time>{item.year}</time>
+              <span>{item.event}</span>
+            </li>
+          ))}
+        </ol>
+      </motion.div>
 
       <div className="proof-strip">
         {proofStats.map((stat) => (
@@ -290,65 +280,73 @@ function Applications() {
     <section id="applications" className="section applications-section">
       <SectionHeader
         title="六大应用领域"
-        description="射频与毫米波变频收发机、相控阵芯片及时钟芯片构成琢时科技的可触达市场。"
+        description="以射频与毫米波变频收发、相控阵芯片及时钟芯片为核心，进入卫星互联网、低空经济、通信、光互联、医疗和雷达感知场景。"
       />
 
-      <div className="application-shell">
-        <div className="application-tabs" role="tablist" aria-label="应用领域">
-          {applications.map((item) => {
-            const Icon = item.icon;
-            const selected = item.id === activeId;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={selected}
-                className={selected ? 'active' : ''}
-                onClick={() => setActiveId(item.id)}
-              >
-                <Icon size={22} weight={selected ? 'duotone' : 'regular'} />
-                <span>{item.title}</span>
-              </button>
-            );
-          })}
+      <div className="application-stage">
+        <div className="application-visual">
+          <motion.img
+            key={active.id}
+            src={active.image}
+            alt={`${active.title}芯片应用场景`}
+            initial={{ opacity: 0, scale: 1.015 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+          />
+          <div className="signal-node node-a">{active.title}</div>
+          <div className="signal-node node-b">{active.subtitle}</div>
         </div>
 
-        <motion.div
-          className="application-detail"
+        <motion.article
+          className="application-panel"
           key={active.id}
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
         >
-          <div className="application-image">
-            <img src={active.image} alt={`${active.title}应用场景`} />
-          </div>
-          <div className="application-copy">
-            <ActiveIcon size={32} weight="duotone" />
-            <span>{active.subtitle}</span>
-            <h3>{active.title}</h3>
-            <p>{active.description}</p>
-            <div className="application-metrics">
-              <div>
-                <small>市场规模</small>
-                <strong>{active.market}</strong>
-              </div>
-              <div>
-                <small>增长状态</small>
-                <strong>{active.growth}</strong>
-              </div>
+          <ActiveIcon size={36} weight="duotone" />
+          <span>{active.subtitle}</span>
+          <h3>{active.title}</h3>
+          <p>{active.description}</p>
+          <div className="application-metrics">
+            <div>
+              <small>市场规模</small>
+              <strong>{active.market}</strong>
             </div>
-            <ul>
-              {active.details.map((detail) => (
-                <li key={detail}>
-                  <Check size={16} weight="bold" />
-                  {detail}
-                </li>
-              ))}
-            </ul>
+            <div>
+              <small>增长状态</small>
+              <strong>{active.growth}</strong>
+            </div>
           </div>
-        </motion.div>
+          <ul>
+            {active.details.map((detail) => (
+              <li key={detail}>
+                <Check size={16} weight="bold" />
+                {detail}
+              </li>
+            ))}
+          </ul>
+        </motion.article>
+      </div>
+
+      <div className="application-tabs" role="tablist" aria-label="应用领域">
+        {applications.map((item) => {
+          const Icon = item.icon;
+          const selected = item.id === activeId;
+          return (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              className={selected ? 'active' : ''}
+              onClick={() => setActiveId(item.id)}
+            >
+              <Icon size={22} weight={selected ? 'duotone' : 'regular'} />
+              <span>{item.title}</span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );
@@ -361,6 +359,7 @@ function Technology() {
     [activeId],
   );
   const ActiveIcon = active.icon;
+  const heroImage = `${import.meta.env.BASE_URL}assets/style3-chip-hero-real-qfn.png`;
 
   return (
     <section id="technology" className="section technology-section">
@@ -369,28 +368,27 @@ function Technology() {
         description="依托顶尖的模拟/射频芯片研发实力，打造兼具高性能与可量产性的定制化芯片。"
       />
 
-      <div className="product-lab">
-        <div className="product-list" role="tablist" aria-label="核心技术产品">
-          {products.map((product) => {
-            const Icon = product.icon;
-            const selected = product.id === activeId;
-            return (
-              <button
-                key={product.id}
-                type="button"
-                role="tab"
-                aria-selected={selected}
-                className={selected ? 'active' : ''}
-                onClick={() => setActiveId(product.id)}
-              >
-                <Icon size={23} weight={selected ? 'duotone' : 'regular'} />
-                <span>
+      <div className="product-stage">
+        <div className="product-visual">
+          <img src={heroImage} alt="芯片产品视觉" />
+          <div className="product-tabs" role="tablist" aria-label="核心技术产品">
+            {products.map((product) => {
+              const selected = product.id === activeId;
+              return (
+                <button
+                  key={product.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  className={selected ? 'active' : ''}
+                  onClick={() => setActiveId(product.id)}
+                >
                   <strong>{product.title}</strong>
                   <small>{product.subtitle}</small>
-                </span>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <motion.article
@@ -401,7 +399,7 @@ function Technology() {
           transition={{ duration: 0.35, ease: 'easeOut' }}
         >
           <div className="product-heading">
-            <ActiveIcon size={34} weight="duotone" />
+            <ActiveIcon size={36} weight="duotone" />
             <div>
               <h3>{active.title}</h3>
               <p>{active.subtitle}</p>

@@ -146,7 +146,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向低轨卫星组网、Ka/Ku 波段相控阵芯片需求，为星载/地面射频单元提供高性能芯片解决方案。',
     details: ['Ka波段多通道相控阵芯片', 'Ku波段变频收发芯片', '星载导航射频单元', '地面站信号处理'],
-    image: assetPath('satellite.jpg'),
+    image: assetPath('style3-app-satellite.png'),
     market: '30亿美元',
     growth: '高速增长',
     icon: GlobeHemisphereWest,
@@ -158,7 +158,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向低空经济、变频收发机、相控阵规模化应用，以及无人机通感一体场景。',
     details: ['无人机图传芯片', '通感一体射频方案', '避障雷达系统', '智能物流网络'],
-    image: assetPath('low-altitude.jpg'),
+    image: assetPath('style3-app-low-altitude.png'),
     market: '25亿美元',
     growth: '爆发增长',
     icon: AirplaneTilt,
@@ -170,7 +170,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向 5G/6G 建设中的时钟发生、同步、分发芯片需求，为基站系统提供核心射频与时钟解决方案。',
     details: ['5G毫米波收发芯片', '时钟发生与同步芯片', '信号分发系统', '基站射频前端'],
-    image: assetPath('base-station.jpg'),
+    image: assetPath('style3-app-base-station.png'),
     market: '15亿美元',
     growth: '稳定增长',
     icon: Broadcast,
@@ -182,7 +182,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向数据中心扩建、MEMS硅振替代石英晶振，为光模块提供高性能时钟与数据转换解决方案。',
     details: ['MEMS硅振芯片', '高速数据转换器', '光模块时钟方案', '数据中心互联'],
-    image: assetPath('optical.jpg'),
+    image: assetPath('style3-app-optical.png'),
     market: '20亿美元',
     growth: '快速增长',
     icon: WaveSine,
@@ -194,7 +194,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向神经刺激、感知芯片和高分辨率闭环神经调控，覆盖芯片设计到临床研究服务。',
     details: ['神经刺激芯片', '肌电探测芯片', '闭环神经调控', '便携化治疗设备'],
-    image: assetPath('medical.jpg'),
+    image: assetPath('style3-app-medical.png'),
     market: '新兴市场',
     growth: '潜力无限',
     icon: Pulse,
@@ -206,7 +206,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向安防、避障、检测等毫米波雷达应用，突出 W 波段四发四收雷达阵列芯片能力。',
     details: ['W波段雷达芯片', 'FMCW调频源', '相控阵雷达', '成像雷达系统'],
-    image: assetPath('radar.jpg'),
+    image: assetPath('style3-app-radar.png'),
     market: '工业应用',
     growth: '持续扩展',
     icon: CellSignalFull,
