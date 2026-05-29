@@ -9,15 +9,14 @@ import {
   GlobeHemisphereWest,
   Graph,
   Heartbeat,
-  HouseLine,
   Lightning,
   MapPin,
+  Phone,
   Pulse,
   Radio,
   ShareNetwork,
   ShieldCheck,
   Sparkle,
-  Timer,
   WaveSine,
 } from '@phosphor-icons/react';
 
@@ -59,6 +58,7 @@ export type Product = {
   id: string;
   title: string;
   subtitle: string;
+  image: string;
   specs: { label: string; value: string }[];
   description: string;
   highlight: string;
@@ -69,6 +69,7 @@ export type TechnologyDirection = {
   title: string;
   process: string;
   items: string[];
+  image: string;
   icon: Icon;
 };
 
@@ -85,7 +86,6 @@ export const navItems: NavItem[] = [
   { label: '首页', href: '#hero' },
   { label: '关于琢时', href: '#about' },
   { label: '应用领域', href: '#applications' },
-  { label: '技术成果', href: '#technology' },
   { label: '公司动态', href: '#news' },
   { label: '联系我们', href: '#contact' },
 ];
@@ -97,9 +97,12 @@ export const heroStats: Stat[] = [
 ];
 
 export const proofStats: Stat[] = [
+  { value: '16+', label: '年研发经验' },
+  { value: '90+', label: '顶刊论文' },
+  { value: '25+', label: '授权专利' },
   { value: '6+', label: '大应用领域' },
   { value: '300万+', label: '芯片累计销售' },
-  { value: '195亿', label: '2029年可触达市场（美元）' },
+  { value: '195亿美元', label: '2029年可触达市场' },
   { value: '11%', label: '年复合增长率' },
 ];
 
@@ -133,7 +136,7 @@ export const valuePillars: ValuePillar[] = [
 export const timeline: TimelineItem[] = [
   { year: '2021', event: '核心团队组建，启动射频/毫米波芯片技术产业化工作' },
   { year: '2022', event: '首款卫通相控阵芯片研发成功；W波段雷达阵列芯片完成开发' },
-  { year: '2023', event: '全硅时钟芯片完成样片；Ka多通道相控阵芯片完成开发' },
+  { year: '2023', event: 'Ka多通道相控阵芯片完成开发' },
   { year: '2024', event: '主体公司成立；自有产品矩阵规划落地，多款芯片进入样品阶段' },
   { year: '2025', event: '完成天使轮融资；合作案例覆盖6大领域' },
 ];
@@ -180,8 +183,8 @@ export const applications: ApplicationArea[] = [
     title: '光通信',
     subtitle: 'Optical Communication',
     description:
-      '面向数据中心扩建、MEMS硅振替代石英晶振，为光模块提供高性能时钟与数据转换解决方案。',
-    details: ['MEMS硅振芯片', '高速数据转换器', '光模块时钟方案', '数据中心互联'],
+      '面向数据中心扩建，为光模块提供高性能时钟与数据转换解决方案。',
+    details: ['高速数据转换器', '光模块时钟方案', '数据中心互联'],
     image: assetPath('optical.jpg'),
     market: '20亿美元',
     growth: '快速增长',
@@ -218,6 +221,7 @@ export const products: Product[] = [
     id: 'phased-array',
     title: '卫通相控阵芯片',
     subtitle: 'ZTW29924 / ZTW29942',
+    image: assetPath('product-phased-array.webp'),
     specs: [
       { label: '工作频段', value: '27.0-31.0 GHz' },
       { label: '通道数量', value: '16通道移相衰减' },
@@ -233,6 +237,7 @@ export const products: Product[] = [
     id: 'radar-array',
     title: 'W波段雷达阵列',
     subtitle: '4发4收毫米波雷达',
+    image: assetPath('product-w-band-radar.webp'),
     specs: [
       { label: '发射链路', value: '4通道' },
       { label: '接收链路', value: '4通道' },
@@ -248,6 +253,7 @@ export const products: Product[] = [
     id: 'receiver',
     title: '宽带抗阻塞接收机',
     subtitle: 'Sub-6GHz射频接收',
+    image: assetPath('product-sub6-receiver.webp'),
     specs: [
       { label: '频率范围', value: '0.4-2.6 GHz' },
       { label: '带外抑制', value: '53 dB' },
@@ -263,6 +269,7 @@ export const products: Product[] = [
     id: 'converter',
     title: '高速数据转换器',
     subtitle: 'ADC / DAC',
+    image: assetPath('product-adc-dac.webp'),
     specs: [
       { label: 'ADC采样率', value: '250 MSps' },
       { label: 'ADC精度', value: '14 bit' },
@@ -280,24 +287,21 @@ export const technologyDirections: TechnologyDirection[] = [
     title: '毫米波与太赫兹',
     process: '40-180nm CMOS/SOI, SiGe, GaN工艺',
     items: ['宽带FMCW调频源', 'W波段四发四收雷达芯片'],
+    image: assetPath('direction-mmwave-thz.webp'),
     icon: Sparkle,
   },
   {
     title: 'Sub-6GHz变频收发',
     process: '28-180nm CMOS/SOI, SiGe, GaAs工艺',
     items: ['0.4-2.6GHz抗阻塞接收机', '面向可穿戴低功耗射频收发机'],
+    image: assetPath('direction-sub6-transceiver.webp'),
     icon: Radio,
-  },
-  {
-    title: 'MEMS时钟与射频',
-    process: '12-130nm CMOS, SiGe工艺',
-    items: ['替代石英晶振的MEMS硅振', '小尺寸低功耗MEMS收发机'],
-    icon: Timer,
   },
   {
     title: '脑机芯片',
     process: 'TSMC 180nm Bulk CMOS工艺',
     items: ['高电压高精度非植入神经刺激芯片'],
+    image: assetPath('direction-neural-chip.webp'),
     icon: Heartbeat,
   },
 ];
@@ -344,7 +348,7 @@ export const contactCards = [
     label: '联系电话',
     value: '敬请期待',
     href: undefined,
-    icon: HouseLine,
+    icon: Phone,
   },
   {
     label: '公司地址',
