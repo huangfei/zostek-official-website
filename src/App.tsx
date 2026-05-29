@@ -334,7 +334,7 @@ function HeroVisual() {
         <span />
         <span />
       </div>
-      <img src={assetPath('hero-z-wafer.png')} alt="" />
+      <img src={assetPath('hero-z-integrated.png')} alt="" />
     </div>
   );
 }
