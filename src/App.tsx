@@ -335,8 +335,6 @@ function HeroVisual() {
         <span />
         <span />
       </div>
-      <span className="hero-label label-one">mmWave 60GHz+</span>
-      <span className="hero-label label-two">Phase Array</span>
       <img src={assetPath('hero-z-wafer.png')} alt="" />
     </div>
   );
