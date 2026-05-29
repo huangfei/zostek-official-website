@@ -328,7 +328,6 @@ function Header() {
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-hidden="true">
-      <div className="blueprint-grid" />
       <div className="wave-rings">
         <span />
         <span />
