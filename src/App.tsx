@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useState } from 'react';
+import type { CSSProperties, FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 import type { Icon } from '@phosphor-icons/react';
 import { motion, useReducedMotion } from 'motion/react';
 import {
@@ -302,6 +303,18 @@ function Header() {
         ))}
       </nav>
 
+      <a
+        className="header-cta"
+        href="#contact"
+        onClick={(event) => {
+          event.preventDefault();
+          onJump('#contact');
+        }}
+      >
+        联系合作
+        <ArrowRight size={14} weight="bold" />
+      </a>
+
       <button
         className="menu-button"
         type="button"
@@ -334,7 +347,7 @@ function HeroVisual() {
         <span />
         <span />
       </div>
-      <img src={assetPath('hero-z-integrated.png')} alt="" />
+      <img src={assetPath('hero-flagship-visual.png')} alt="" />
     </div>
   );
 }
@@ -486,25 +499,29 @@ function Applications() {
             <motion.article
               className="application-card"
               key={item.id}
+              style={{ '--application-image': `url(${item.image})` } as CSSProperties}
               initial="hidden"
               whileInView="visible"
               viewport={viewport}
               variants={fadeUp}
               transition={{ duration: 0.46, ease: 'easeOut', delay: index * 0.035 }}
             >
-              <Icon size={32} weight="duotone" />
-              <h3>{item.title}</h3>
-              <span>{item.subtitle}</span>
-              <p>{item.description}</p>
-              <strong>产品/方案</strong>
-              <ul>
-                {item.details.map((detail) => (
-                  <li key={detail}>{detail}</li>
-                ))}
-              </ul>
-              <div className="card-metrics">
-                <span>市场规模 {item.market}</span>
-                <span>{item.growth}</span>
+              <div className="application-media" aria-hidden="true" />
+              <div className="application-copy">
+                <Icon size={32} weight="duotone" />
+                <h3>{item.title}</h3>
+                <span>{item.subtitle}</span>
+                <p>{item.description}</p>
+                <strong>产品/方案</strong>
+                <ul>
+                  {item.details.map((detail) => (
+                    <li key={detail}>{detail}</li>
+                  ))}
+                </ul>
+                <div className="card-metrics">
+                  <span>市场规模 {item.market}</span>
+                  <span>{item.growth}</span>
+                </div>
               </div>
             </motion.article>
           );
@@ -529,7 +546,7 @@ function Products() {
       <div className="product-grid">
         {products.map((product, index) => (
           <motion.article
-            className="product-card"
+            className={`product-card${index === 0 ? ' product-card--featured' : ''}`}
             key={product.id}
             initial="hidden"
             whileInView="visible"

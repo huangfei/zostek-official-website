@@ -149,7 +149,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向低轨卫星组网、Ka/Ku 波段相控阵芯片需求，为星载/地面射频单元提供高性能芯片解决方案。',
     details: ['Ka波段多通道相控阵芯片', 'Ku波段变频收发芯片', '星载导航射频单元', '地面站信号处理'],
-    image: assetPath('satellite.jpg'),
+    image: assetPath('app-satellite-flagship.jpg'),
     market: '30亿美元',
     growth: '高速增长',
     icon: GlobeHemisphereWest,
@@ -161,7 +161,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向低空经济、变频收发机、相控阵规模化应用，以及无人机通感一体场景。',
     details: ['无人机图传芯片', '通感一体射频方案', '避障雷达系统', '智能物流网络'],
-    image: assetPath('low-altitude.jpg'),
+    image: assetPath('app-low-altitude-flagship.jpg'),
     market: '25亿美元',
     growth: '爆发增长',
     icon: AirplaneTilt,
@@ -173,7 +173,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向 5G/6G 建设中的时钟发生、同步、分发芯片需求，为基站系统提供核心射频与时钟解决方案。',
     details: ['5G毫米波收发芯片', '时钟发生与同步芯片', '信号分发系统', '基站射频前端'],
-    image: assetPath('base-station.jpg'),
+    image: assetPath('app-base-station-flagship.jpg'),
     market: '15亿美元',
     growth: '稳定增长',
     icon: Broadcast,
@@ -185,7 +185,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向数据中心扩建，为光模块提供高性能时钟与数据转换解决方案。',
     details: ['高速数据转换器', '光模块时钟方案', '数据中心互联'],
-    image: assetPath('optical.jpg'),
+    image: assetPath('app-optical-flagship.jpg'),
     market: '20亿美元',
     growth: '快速增长',
     icon: WaveSine,
@@ -197,7 +197,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向神经刺激、感知芯片和高分辨率闭环神经调控，覆盖芯片设计到临床研究服务。',
     details: ['神经刺激芯片', '肌电探测芯片', '闭环神经调控', '便携化治疗设备'],
-    image: assetPath('medical.jpg'),
+    image: assetPath('app-medical-flagship.jpg'),
     market: '新兴市场',
     growth: '潜力无限',
     icon: Pulse,
@@ -209,7 +209,7 @@ export const applications: ApplicationArea[] = [
     description:
       '面向安防、避障、检测等毫米波雷达应用，突出 W 波段四发四收雷达阵列芯片能力。',
     details: ['W波段雷达芯片', 'FMCW调频源', '相控阵雷达', '成像雷达系统'],
-    image: assetPath('radar.jpg'),
+    image: assetPath('app-radar-flagship.jpg'),
     market: '工业应用',
     growth: '持续扩展',
     icon: CellSignalFull,
@@ -221,7 +221,7 @@ export const products: Product[] = [
     id: 'phased-array',
     title: '卫通相控阵芯片',
     subtitle: 'ZTW29924 / ZTW29942',
-    image: assetPath('product-phased-array.webp'),
+    image: assetPath('product-phased-array-flagship.jpg'),
     specs: [
       { label: '工作频段', value: '27.0-31.0 GHz' },
       { label: '通道数量', value: '16通道移相衰减' },
@@ -237,7 +237,7 @@ export const products: Product[] = [
     id: 'radar-array',
     title: 'W波段雷达阵列',
     subtitle: '4发4收毫米波雷达',
-    image: assetPath('product-w-band-radar.webp'),
+    image: assetPath('product-w-band-radar-flagship.jpg'),
     specs: [
       { label: '发射链路', value: '4通道' },
       { label: '接收链路', value: '4通道' },
@@ -253,7 +253,7 @@ export const products: Product[] = [
     id: 'receiver',
     title: '宽带抗阻塞接收机',
     subtitle: 'Sub-6GHz射频接收',
-    image: assetPath('product-sub6-receiver.webp'),
+    image: assetPath('product-sub6-receiver-flagship.jpg'),
     specs: [
       { label: '频率范围', value: '0.4-2.6 GHz' },
       { label: '带外抑制', value: '53 dB' },
@@ -269,7 +269,7 @@ export const products: Product[] = [
     id: 'converter',
     title: '高速数据转换器',
     subtitle: 'ADC / DAC',
-    image: assetPath('product-adc-dac.webp'),
+    image: assetPath('product-adc-dac-flagship.jpg'),
     specs: [
       { label: 'ADC采样率', value: '250 MSps' },
       { label: 'ADC精度', value: '14 bit' },

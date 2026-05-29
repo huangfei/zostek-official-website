@@ -163,7 +163,7 @@ font-family: Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, san
 - SVG / CSS 绘制晶圆圆盘、芯片网格、蓝色微光。
 - 右侧 Hero 使用一个大型蓝色玻璃质感 `Z`，可用 SVG、CSS 3D、或图片资源。
 - 卡片内使用线性图标，图标风格统一：蓝色描边、圆角、简洁。
-- 背景中加入浅蓝色电路走线、点阵、参数标注，如 `mmWave 60GHz+`、`Phase Array`、`System Solution`。
+- 背景中加入浅蓝色电路走线、点阵、参数栅格与低透明度工程辅助线，不在图片中嵌入业务文案。
 
 ---
 
