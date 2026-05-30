@@ -86,6 +86,7 @@ export const navItems: NavItem[] = [
   { label: '首页', href: '#hero' },
   { label: '关于琢时', href: '#about' },
   { label: '应用领域', href: '#applications' },
+  { label: '技术成果', href: '#technology' },
   { label: '公司动态', href: '#news' },
   { label: '联系我们', href: '#contact' },
 ];

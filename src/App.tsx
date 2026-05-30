@@ -1,5 +1,4 @@
-import type { CSSProperties, FormEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import type { Icon } from '@phosphor-icons/react';
 import { motion, useReducedMotion } from 'motion/react';
 import {
@@ -38,6 +37,52 @@ const fadeUp = {
 const viewport = { once: true, amount: 0.16 };
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+const spectrumBars = [
+  28, 34, 24, 42, 31, 58, 36, 46, 26, 72, 38, 32, 52, 29, 88, 45, 35, 64, 39, 31, 96, 44, 33, 56, 28, 41, 76, 37, 30, 50,
+  43, 68, 35, 27, 84, 48,
+];
+
+function SignalScope({ className = '' }: { className?: string }) {
+  return (
+    <div className={`signal-scope ${className}`} aria-hidden="true">
+      <svg viewBox="0 0 1000 420" preserveAspectRatio="none">
+        <g className="signal-scope__spectrum">
+          {spectrumBars.map((height, index) => {
+            const x = 66 + index * 24;
+            return (
+              <line
+                key={`${height}-${index}`}
+                x1={x}
+                y1="344"
+                x2={x}
+                y2={344 - height}
+                opacity={0.18 + height / 190}
+              />
+            );
+          })}
+        </g>
+        <path
+          className="signal-scope__trace signal-scope__trace--phase"
+          d="M68 122 C112 100 142 136 184 112 C236 82 268 152 318 124 C372 94 410 142 458 118 C520 88 552 162 612 130 C672 98 710 146 772 118 C838 88 878 136 934 110"
+        />
+        <path
+          className="signal-scope__trace signal-scope__trace--sine signal-scope__trace--sine-primary"
+          d="M68 224 C108 182 148 266 188 224 S268 182 308 224 S388 266 428 224 S508 182 548 224 S628 266 668 224 S748 182 788 224 S868 266 936 224"
+        />
+        <path
+          className="signal-scope__trace signal-scope__trace--sine signal-scope__trace--sine-high"
+          d="M68 264 C88 234 108 294 128 264 S168 234 188 264 S228 294 248 264 S288 234 308 264 S348 294 368 264 S408 234 428 264 S468 294 488 264 S528 234 548 264 S588 294 608 264 S648 234 668 264 S708 294 728 264 S768 234 788 264 S828 294 848 264 S888 234 936 264"
+        />
+        <path
+          className="signal-scope__trace signal-scope__trace--noise"
+          d="M70 338 C130 326 174 342 232 330 C286 318 334 346 392 326 C460 304 512 340 574 322 C634 302 690 334 748 316 C816 294 868 322 936 306"
+        />
+        <line className="signal-scope__sweep" x1="665" y1="52" x2="665" y2="366" />
+      </svg>
+    </div>
+  );
+}
 
 const footerColumns = [
   {
@@ -103,6 +148,8 @@ function FrequencyBackground() {
       '--signal-speed',
       '--signal-rate',
       '--signal-sweep-rate',
+      '--signal-sine-rate',
+      '--signal-frequency-scale',
       '--signal-mesh-size',
       '--signal-glow',
       '--signal-glow-size',
@@ -119,6 +166,8 @@ function FrequencyBackground() {
       root.style.setProperty('--signal-speed', '0');
       root.style.setProperty('--signal-rate', '28s');
       root.style.setProperty('--signal-sweep-rate', '22s');
+      root.style.setProperty('--signal-sine-rate', '22s');
+      root.style.setProperty('--signal-frequency-scale', '1');
 
       return () => {
         variables.forEach((variable) => root.style.removeProperty(variable));
@@ -172,6 +221,8 @@ function FrequencyBackground() {
       root.style.setProperty('--signal-speed', signal.toFixed(3));
       root.style.setProperty('--signal-rate', `${(20 - signal * 14).toFixed(2)}s`);
       root.style.setProperty('--signal-sweep-rate', `${(13 - signal * 8).toFixed(2)}s`);
+      root.style.setProperty('--signal-sine-rate', `${(18 - signal * 12).toFixed(2)}s`);
+      root.style.setProperty('--signal-frequency-scale', (1 + signal * 0.8).toFixed(3));
       root.style.setProperty('--signal-mesh-size', `${(66 - signal * 20).toFixed(2)}px`);
       root.style.setProperty('--signal-glow', (0.08 + signal * 0.17).toFixed(3));
       root.style.setProperty('--signal-glow-size', `${(26 + signal * 18).toFixed(2)}%`);
@@ -204,6 +255,7 @@ function FrequencyBackground() {
       <div className="frequency-background__mesh" />
       <div className="frequency-background__wave frequency-background__wave--wide" />
       <div className="frequency-background__wave frequency-background__wave--tight" />
+      <SignalScope className="signal-scope--global" />
     </div>
   );
 }
@@ -303,18 +355,6 @@ function Header() {
         ))}
       </nav>
 
-      <a
-        className="header-cta"
-        href="#contact"
-        onClick={(event) => {
-          event.preventDefault();
-          onJump('#contact');
-        }}
-      >
-        联系合作
-        <ArrowRight size={14} weight="bold" />
-      </a>
-
       <button
         className="menu-button"
         type="button"
@@ -341,13 +381,8 @@ function Header() {
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-hidden="true">
-      <div className="wave-rings">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <img src={assetPath('hero-flagship-visual.png')} alt="" />
+      <SignalScope className="signal-scope--hero" />
+      <img src={assetPath('hero-z-integrated.png')} alt="" />
     </div>
   );
 }
@@ -499,29 +534,25 @@ function Applications() {
             <motion.article
               className="application-card"
               key={item.id}
-              style={{ '--application-image': `url(${item.image})` } as CSSProperties}
               initial="hidden"
               whileInView="visible"
               viewport={viewport}
               variants={fadeUp}
               transition={{ duration: 0.46, ease: 'easeOut', delay: index * 0.035 }}
             >
-              <div className="application-media" aria-hidden="true" />
-              <div className="application-copy">
-                <Icon size={32} weight="duotone" />
-                <h3>{item.title}</h3>
-                <span>{item.subtitle}</span>
-                <p>{item.description}</p>
-                <strong>产品/方案</strong>
-                <ul>
-                  {item.details.map((detail) => (
-                    <li key={detail}>{detail}</li>
-                  ))}
-                </ul>
-                <div className="card-metrics">
-                  <span>市场规模 {item.market}</span>
-                  <span>{item.growth}</span>
-                </div>
+              <Icon size={32} weight="duotone" />
+              <h3>{item.title}</h3>
+              <span>{item.subtitle}</span>
+              <p>{item.description}</p>
+              <strong>产品/方案</strong>
+              <ul>
+                {item.details.map((detail) => (
+                  <li key={detail}>{detail}</li>
+                ))}
+              </ul>
+              <div className="card-metrics">
+                <span>市场规模 {item.market}</span>
+                <span>{item.growth}</span>
               </div>
             </motion.article>
           );
@@ -546,7 +577,7 @@ function Products() {
       <div className="product-grid">
         {products.map((product, index) => (
           <motion.article
-            className={`product-card${index === 0 ? ' product-card--featured' : ''}`}
+            className="product-card"
             key={product.id}
             initial="hidden"
             whileInView="visible"
